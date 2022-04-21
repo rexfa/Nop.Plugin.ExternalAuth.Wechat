@@ -1,0 +1,11 @@
+{
+  "Group": "ExternalAuth methods",
+  "FriendlyName": "Wechat authentication",
+  "SystemName": "ExternalAuth.Wechat",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.50" ],
+  "Author": "Rex Zhang",
+  "DisplayOrder": 5,
+  "FileName": "Nop.Plugin.ExternalAuth.Wechat.dll",
+  "Description": "This plugin enables Wechat authentication (login using Wechat account)"
+}
