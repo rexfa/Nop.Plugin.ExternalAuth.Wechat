@@ -1,22 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Globalization;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
-using System.Globalization;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Http;
 
-namespace Nop.Plugin.ExternalAuth.Wechat.Authentication
+namespace Microsoft.AspNetCore.Authentication.Wechat
 {
+    /// <summary>
+    /// Configuration options for <see cref="WechatHandler"/>.
+    /// </summary>
     public class WechatOptions : OAuthOptions
     {
+        /// <summary>
+        /// Initializes a new <see cref="WechatOptions"/>.
+        /// </summary>
         public WechatOptions()
         {
-            CallbackPath = new PathString("/signin-facebook");
+            CallbackPath = new PathString("/signin-wechat");
             SendAppSecretProof = true;
-            AuthorizationEndpoint = FacebookDefaults.AuthorizationEndpoint;
-            TokenEndpoint = FacebookDefaults.TokenEndpoint;
-            UserInformationEndpoint = FacebookDefaults.UserInformationEndpoint;
+            AuthorizationEndpoint = WechatDefaults.AuthorizationEndpoint;
+            TokenEndpoint = WechatDefaults.TokenEndpoint;
+            UserInformationEndpoint = WechatDefaults.UserInformationEndpoint;
             Scope.Add("email");
             Fields.Add("name");
             Fields.Add("email");

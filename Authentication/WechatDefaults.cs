@@ -1,5 +1,5 @@
 ﻿
-namespace Nop.Plugin.ExternalAuth.Wechat.Authentication
+namespace Microsoft.AspNetCore.Authentication.Wechat
 {
     /// <summary>
     /// Default values for the Wechat authentication handler.
@@ -20,25 +20,25 @@ namespace Nop.Plugin.ExternalAuth.Wechat.Authentication
 
 
         /// <summary>
-        /// 请求CODE ***
+        /// 第一步 请求CODE ***
         /// </summary>
         public static readonly string AuthorizationEndpoint = "https://open.weixin.qq.com/connect/qrconnect";
         /// <summary>
-        /// 通过code获取access_token ***
+        /// 第二步 通过code获取access_token ***
         /// </summary>
         public static readonly string TokenEndpoint = "https://api.weixin.qq.com/sns/oauth2/access_token";
         /// <summary>
-        /// 获取用户个人信息 ***
+        /// 第三步 获取用户个人信息 ***
         /// </summary>
         public static readonly string UserInformationEndpoint = "https://api.weixin.qq.com/sns/userinfo";
 
 
         /// <summary>
-        /// 刷新access_token有效期
+        /// 第三步后 刷新access_token有效期
         /// </summary>
         public static readonly string RefreshTokenEndpoint = "https://api.weixin.qq.com/sns/oauth2/refresh_token";
         /// <summary>
-        /// 检查access_token有效性
+        /// 第三步后 检查access_token有效性
         /// </summary>
         public static readonly string CheckTokenEndpoint = "https://api.weixin.qq.com//sns/auth";
     }

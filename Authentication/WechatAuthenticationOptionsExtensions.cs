@@ -1,20 +1,64 @@
 ﻿using System;
 using Microsoft.AspNetCore.Authentication;
-using Nop.Plugin.ExternalAuth.Wechat.Authentication;
+using Microsoft.AspNetCore.Authentication.Wechat;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
+    /// <summary>
+    /// 配置 Wechat OAuth 身份验证的扩展方法。
+    /// </summary>
     public static class WechatAuthenticationOptionsExtensions
     {
+        /// <summary>
+        /// Adds Wechat OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+        /// The default scheme is specified by <see cref="WechatDefaults.AuthenticationScheme"/>.
+        /// <para>
+        /// Wechat authentication allows application users to sign in with their Wechat account.
+        /// </para>
+        /// </summary>
+        /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
+        /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
         public static AuthenticationBuilder AddWechat(this AuthenticationBuilder builder)
-    => builder.AddWechat(WechatDefaults.AuthenticationScheme, _ => { });
+            => builder.AddWechat(WechatDefaults.AuthenticationScheme, _ => { });
 
+        /// <summary>
+        /// Adds Wechat OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+        /// The default scheme is specified by <see cref="WechatDefaults.AuthenticationScheme"/>.
+        /// <para>
+        /// Wechat authentication allows application users to sign in with their Wechat account.
+        /// </para>
+        /// </summary>
+        /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
+        /// <param name="configureOptions">A delegate to configure <see cref="WechatOptions"/>.</param>
+        /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
         public static AuthenticationBuilder AddWechat(this AuthenticationBuilder builder, Action<WechatOptions> configureOptions)
             => builder.AddWechat(WechatDefaults.AuthenticationScheme, configureOptions);
 
+        /// <summary>
+        /// Adds Wechat OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+        /// The default scheme is specified by <see cref="WechatDefaults.AuthenticationScheme"/>.
+        /// <para>
+        /// Wechat authentication allows application users to sign in with their Wechat account.
+        /// </para>
+        /// </summary>
+        /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
+        /// <param name="authenticationScheme">The authentication scheme.</param>
+        /// <param name="configureOptions">A delegate to configure <see cref="WechatOptions"/>.</param>
+        /// <returns>A reference to <paramref name="builder"/> after the operation has completed.</returns>
         public static AuthenticationBuilder AddWechat(this AuthenticationBuilder builder, string authenticationScheme, Action<WechatOptions> configureOptions)
             => builder.AddWechat(authenticationScheme, WechatDefaults.DisplayName, configureOptions);
 
+        /// <summary>
+        /// Adds Wechat OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+        /// The default scheme is specified by <see cref="WechatDefaults.AuthenticationScheme"/>.
+        /// <para>
+        /// Wechat authentication allows application users to sign in with their Wechat account.
+        /// </para>
+        /// </summary>
+        /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
+        /// <param name="authenticationScheme">The authentication scheme.</param>
+        /// <param name="displayName">A display name for the authentication handler.</param>
+        /// <param name="configureOptions">A delegate to configure <see cref="WechatOptions"/>.</param>
         public static AuthenticationBuilder AddWechat(this AuthenticationBuilder builder, string authenticationScheme, string displayName, Action<WechatOptions> configureOptions)
             => builder.AddOAuth<WechatOptions, WechatHandler>(authenticationScheme, displayName, configureOptions);
     }

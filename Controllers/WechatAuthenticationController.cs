@@ -19,7 +19,8 @@ using Nop.Plugin.ExternalAuth.Wechat.Authentication;
 
 namespace Nop.Plugin.ExternalAuth.Wechat.Controllers
 {
-    internal class WechatAuthenticationController : BasePluginController
+    [AutoValidateAntiforgeryToken]
+    public class WechatAuthenticationController : BasePluginController
     {
         #region Fields
 
@@ -62,5 +63,40 @@ namespace Nop.Plugin.ExternalAuth.Wechat.Controllers
         }
 
         #endregion
-    }
+
+        #region Methods
+        /// <summary>
+        /// 调用微信第三方登录页面
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
+        /// <exception cref="NopException"></exception>
+        public async Task<IActionResult> Login(string returnUrl)
+        {
+            var store = await _storeContext.GetCurrentStoreAsync();
+            var methodIsAvailable = await _authenticationPluginManager
+                .IsPluginActiveAsync(WechatAuthenticationDefaults.SystemName, await _workContext.GetCurrentCustomerAsync(), store.Id);
+            if (!methodIsAvailable)
+                throw new NopException("Wechat authentication module cannot be loaded");
+
+            if (string.IsNullOrEmpty(_wechatExternalAuthSettings.AppID) ||
+                string.IsNullOrEmpty(_wechatExternalAuthSettings.AppSecret))
+            {
+                throw new NopException("Wechat authentication module not configured");
+            }
+
+            //configure login callback action
+            var authenticationProperties = new AuthenticationProperties
+            {
+                RedirectUri = Url.Action("LoginCallback", "WechatAuthentication", new { returnUrl = returnUrl })
+            };
+            authenticationProperties.SetString(WechatAuthenticationDefaults.ErrorCallback, Url.RouteUrl("Login", new { returnUrl }));
+
+            return Challenge(authenticationProperties, WechatDefaults.AuthenticationScheme);
+        }
+        public async Task<IActionResult> LoginCallback(string returnUrl)
+        {
+        }
+            #endregion
+     }
 }

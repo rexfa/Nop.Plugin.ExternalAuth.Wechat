@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 
-namespace Nop.Plugin.ExternalAuth.Wechat.Authentication
+namespace Microsoft.AspNetCore.Authentication.Wechat
 {
     /// <summary>
     /// Wechat 的基于 OAuth 的身份验证的身份验证处理程序。
